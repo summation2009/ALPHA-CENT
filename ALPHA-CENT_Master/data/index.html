@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<!-- 
+  Rui Santos
+  Complete project details at https://RandomNerdTutorials.com  
+-->
+<html>
+<head>
+  <title>Line Alarm Web Server</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <!--<link rel="stylesheet" type="text/css" href="style.css">-->
+
+</head>
+<body>
+  
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="logo.png">
+    </div>
+    <div class="col">
+      
+    </div>
+    <div class="col">
+      
+    </div>
+	<div class="col">
+      
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <h1>LINE ALARM CONTROLLER</h1>
+
+  <hr>
+  
+  <!--<p>
+    <div>INPUT-01 : <span id="in1" class="button">N/A</span></div>
+    <div>INPUT-02 : <span id="in2" class="button">N/A</span></div>
+    <div>INPUT-03 : <span id="in3" class="button">N/A</span></div>
+    <div>INPUT-04 : <span id="in4" class="button">N/A</span></div>
+    <div>INPUT-05 : <span id="in5" class="button">N/A</span></div>
+    <div>INPUT-06 : <span id="in6" class="button">N/A</span></div>
+    <div>INPUT-07 : <span id="in7" class="button">N/A</span></div>
+    <div>INPUT-08 : <span id="in8" class="button">N/A</span></div>
+    
+    
+    <div>INPUT-09 : <span id="in9" class="button">N/A</span></div>
+    <div>INPUT-10 : <span id="in10" class="button">N/A</span></div>
+    <div>INPUT-11 : <span id="in11" class="button">N/A</span></div>
+    <div>INPUT-12 : <span id="in12" class="button">N/A</span></div>
+    <div>INPUT-13 : <span id="in13" class="button">N/A</span></div>
+    <div>INPUT-14 : <span id="in14" class="button">N/A</span></div>
+    <div>INPUT-15 : <span id="in15" class="button">N/A</span></div>
+    <div>INPUT-16 : <span id="in16" class="button">N/A</span></div>
+  </p>-->
+
+
+  <table border="0"  cellspacing="0" cellpadding="" style="width:100%" >
+    <tr><td align="left">Temperature1:</td><td><span id="Temp1" class="">N/A</span></td><td align="left">&deg;C</td></tr>
+    <tr><td align="left">Temperature2:</td><td><span id="Temp2" class="">N/A</span></td><td align="left">&deg;C</td></tr>
+    <tr><td align="left">Temperature3:</td><td><span id="Temp3" class="">N/A</span></td><td align="left">&deg;C</td></tr>
+  </table>
+
+  <hr>
+
+
+  <table border="0"  cellspacing="0" cellpadding="" style="width:100%" >
+    <tr><td align="left">Input-01:</td><td><span id="in1" class="btn btn-primary">N/A</span></td><td align="left">Input-09:</td><td><span id="in9" class="btn btn-primary">N/A</span></td></tr>
+    <tr><td align="left">Input-02:</td><td><span id="in2" class="btn btn-primary">N/A</span></td><td align="left">Input-10:</td><td><span id="in10" class="btn btn-primary">N/A</span></td></tr>
+    <tr><td align="left">Input-03:</td><td><span id="in3" class="btn btn-primary">N/A</span></td><td align="left">Input-11:</td><td><span id="in11" class="btn btn-primary">N/A</span></td></tr>
+    <tr><td align="left">Input-04:</td><td><span id="in4" class="btn btn-primary">N/A</span></td><td align="left">Input-12:</td><td><span id="in12" class="btn btn-primary">N/A</span></td></tr>
+    <tr><td align="left">Input-05:</td><td><span id="in5" class="btn btn-primary">N/A</span></td><td align="left">Input-13:</td><td><span id="in13" class="btn btn-primary">N/A</span></td></tr>
+    <tr><td align="left">Input-06:</td><td><span id="in6" class="btn btn-primary">N/A</span></td><td align="left">Input-14:</td><td><span id="in14" class="btn btn-primary">N/A</span></td></tr>
+    <tr><td align="left">Input-07:</td><td><span id="in7" class="btn btn-primary">N/A</span></td><td align="left">Input-15:</td><td><span id="in15" class="btn btn-primary">N/A</span></td></tr>
+    <tr><td align="left">Input-08:</td><td><span id="in8" class="btn btn-primary">N/A</span></td><td align="left">Input-16:</td><td><span id="in16" class="btn btn-primary">N/A</span></td></tr>
+  </table>
+
+  <hr>
+  
+  <p class="text-center">
+    <a href="configwifi.html" class="btn btn-primary">Network config</a>
+    <a href="configmessage.html" class="btn btn-info">Message config</a>
+    <span id="saveresult"></span>
+  </p>
+
+</div>
+
+</body>
+
+<script src="jquery-3.5.1.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    console.log('ready');
+    
+
+      setInterval(function() {
+        $.get({
+          url: "/getInputState",
+          //data: strdat,
+          success: function(response) {
+
+            console.log(response);
+
+            $("#saveresult").html("Initialize input data...").fadeOut(3000);
+
+            var str = response.split(",");
+
+            for(i=0;i<=15;i++) {
+              if (str[i] == "1") {
+                $("#in" + String(i+1)).html("ON").removeClass("btn-danger");
+              } else {
+                $("#in" + String(i+1)).html("OFF").addClass("btn-danger");
+              }
+            }
+
+            
+
+            $("#Temp1").html(str[16]);
+            $("#Temp2").html(str[17]);
+            $("#Temp3").html(str[18]);
+          },
+          error: function(xhr) {
+              //Do Something to handle error
+          }
+        });
+      }, 1000);
+
+  });
+
+</script>
+</html>

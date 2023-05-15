@@ -1,0 +1,322 @@
+<!DOCTYPE html>
+<!-- 
+  Rui Santos
+  Complete project details at https://RandomNerdTutorials.com  
+-->
+<html>
+<head>
+  <title>ESP32 Web Server</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" href="data:,">
+  <link rel="stylesheet" type="text/css" href="bootstrap.min.css">
+  <link rel="stylesheet" type="text/css" href="style.css">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+
+  <style>
+    table {
+      border-collapse:separate; 
+      border-spacing: 0 1em;
+    }
+  </style>
+</head>
+<body>
+
+  
+<div class="container">
+  <div class="row">
+    <div class="col">
+      <img src="logo.png">
+    </div>
+    <div class="col">
+      
+    </div>
+    <div class="col">
+      
+    </div>
+	<div class="col">
+      
+    </div>
+  </div>
+</div>
+
+<div class="container">
+
+  <h1>Configuration</h1>
+
+  <hr>
+
+
+  <table border="0"  cellspacing="0" cellpadding="0" style="width:100%" >
+    <tr><td align="right"></td><td>*Host name with include path * example : https://yourhostname.com/datalog</td><td></td></tr>
+    <tr><td align="right" size="20">Host name (Send data) :&nbsp;</td><td><input type="text" id="server_address" name="server_address" value="" size="50"></td><td></td></tr>
+
+    <tr><td align="right" size="20">Host name (Get data)  :&nbsp;</td><td><input type="text" id="server_get_address" name="server_get_address" value="" size="50"></td><td></td></tr>
+    
+    
+    <tr><td align="right" size="20">UUID :&nbsp;</td><td><input type="text" id="uuid" name="uuid" value="" size="50"></td><td></td></tr>
+
+    <tr><td align="right" size="10">Send data every :&nbsp;</td><td><input type="text" id="send_data_every" name="send_data_every" value="" size="10">&nbsp;Seconds</td></tr>
+    <tr><td align="right"></td><td>**Data will send every configuration time and send when "Output" change status (ON &lt;--&gt;OFF)</td><td></td></tr>
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+
+
+    <tr><td align="right" size="10">Output 1 ON at Temperature &lt;=&nbsp;</td><td><input type="text" id="out1on" name="out1on" value="" size="10">&nbsp;&#8451;</td></tr>
+    <tr><td align="right" size="10">Output 1 OFF at Temperature &gt;=&nbsp;</td><td><input type="text" id="out1off" name="out1off" value="" size="10">&nbsp;&#8451;</td></tr>
+
+    <tr><td align="right" size="10">Output 2 ON at Temperature &lt;=&nbsp;</td><td><input type="text" id="out2on" name="out2on" value="" size="10">&nbsp;&#8451;</td></tr>
+    <tr><td align="right" size="10">Output 2 OFF at Temperature &gt;=&nbsp;</td><td><input type="text" id="out2off" name="out2off" value="" size="10">&nbsp;&#8451;</td></tr>
+
+    <tr><td align="right" size="10">Output 3 ON at Temperature &lt;=&nbsp;</td><td><input type="text" id="out3on" name="out3on" value="" size="10">&nbsp;&#8451;</td></tr>
+    <tr><td align="right" size="10">Output 3 OFF at Temperature &gt;=&nbsp;</td><td><input type="text" id="out3off" name="out3off" value="" size="10">&nbsp;&#8451;</td></tr>
+
+    <tr><td align="right" size="10">Output 4 ON at Temperature &lt;=&nbsp;</td><td><input type="text" id="out4on" name="out4on" value="" size="10">&nbsp;&#8451;</td></tr>
+    <tr><td align="right" size="10">Output 4 OFF at Temperature &gt;=&nbsp;</td><td><input type="text" id="out4off" name="out4off" value="" size="10">&nbsp;&#8451;</td></tr>
+    
+    <tr><td>&nbsp;</td><td>&nbsp;</td><td>&nbsp;</td></tr>
+    
+    <!--<tr><td align="right">Time delay:&nbsp;</td><td><input type="text" id="timeup" name="timeup" value="" size="30">&nbsp;Minute</td></tr>
+    <tr><td>&nbsp;</td><td>(If set Time delay = 0 -> Not repeat send)</td><td>&nbsp;</td></tr>-->
+  </table>
+
+  <hr>
+
+
+  <!-- <div>
+    <tr><td align="center"><H3>Input Message</H3></td></tr>
+	<br>
+	<tr>
+		<td><input type="checkbox" id="Ex" name="Ex" checked disabled><label for="Ex">&nbsp;Enable send alarm message</label></td><br>
+	    <td><input type="checkbox" id="Ey" name="Ey"  disabled><label for="Ey">&nbsp;Disable send alarm message</label></td>
+	</tr>
+  </div>
+  
+  <br>
+  
+
+  <form action="" method="get">
+    <table border="0"  cellspacing="0" cellpadding="" style="width:100%" >
+
+    <tr><td>Input-01:&nbsp;ON&nbsp;<input type="checkbox" id="E1ON" name="E1ON">&nbsp;<input type="text" id="message1ON" size="20"></td>
+      <td>Input-01:&nbsp;OFF&nbsp;<input type="checkbox" id="E1OFF" name="E1OFF">&nbsp;<input type="text" id="message1OFF" size="20"></td>
+  </tr>
+  
+  <tr><td>Input-02:&nbsp;ON&nbsp;<input type="checkbox" id="E2ON" name="E2ON">&nbsp;<input type="text" id="message2ON" size="20"></td>
+      <td>Input-02:&nbsp;OFF&nbsp;<input type="checkbox" id="E2OFF" name="E2OFF">&nbsp;<input type="text" id="message2OFF" size="20"></td>
+  </tr>
+  
+  <tr><td>Input-03:&nbsp;ON&nbsp;<input type="checkbox" id="E3ON" name="E3ON">&nbsp;<input type="text" id="message3ON" size="20"></td>
+      <td>Input-03:&nbsp;OFF&nbsp;<input type="checkbox" id="E3OFF" name="E3OFF">&nbsp;<input type="text" id="message3OFF" size="20"></td>
+  </tr>
+
+<tr><td>Input-04:&nbsp;ON&nbsp;<input type="checkbox" id="E4ON" name="E4ON">&nbsp;<input type="text" id="message4ON" size="20"></td>
+    <td>Input-04:&nbsp;OFF&nbsp;<input type="checkbox" id="E4OFF" name="E4OFF">&nbsp;<input type="text" id="message4OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-05:&nbsp;ON&nbsp;<input type="checkbox" id="E5ON" name="E5ON">&nbsp;<input type="text" id="message5ON" size="20"></td>
+    <td>Input-05:&nbsp;OFF&nbsp;<input type="checkbox" id="E5OFF" name="E5OFF">&nbsp;<input type="text" id="message5OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-06:&nbsp;ON&nbsp;<input type="checkbox" id="E6ON" name="E6ON">&nbsp;<input type="text" id="message6ON" size="20"></td>
+    <td>Input-06:&nbsp;OFF&nbsp;<input type="checkbox" id="E6OFF" name="E6OFF">&nbsp;<input type="text" id="message6OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-07:&nbsp;ON&nbsp;<input type="checkbox" id="E7ON" name="E7ON">&nbsp;<input type="text" id="message7ON" size="20"></td>
+    <td>Input-07:&nbsp;OFF&nbsp;<input type="checkbox" id="E7OFF" name="E7OFF">&nbsp;<input type="text" id="message7OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-08:&nbsp;ON&nbsp;<input type="checkbox" id="E8ON" name="E8ON">&nbsp;<input type="text" id="message8ON" size="20"></td>
+    <td>Input-08:&nbsp;OFF&nbsp;<input type="checkbox" id="E8OFF" name="E8OFF">&nbsp;<input type="text" id="message8OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-09:&nbsp;ON&nbsp;<input type="checkbox" id="E9ON" name="E9ON">&nbsp;<input type="text" id="message9ON" size="20"></td>
+    <td>Input-09:&nbsp;OFF&nbsp;<input type="checkbox" id="E9OFF" name="E9OFF">&nbsp;<input type="text" id="message9OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-10:&nbsp;ON&nbsp;<input type="checkbox" id="E10ON" name="E10ON">&nbsp;<input type="text" id="message10ON" size="20"></td>
+    <td>Input-10:&nbsp;OFF&nbsp;<input type="checkbox" id="E10OFF" name="E10OFF">&nbsp;<input type="text" id="message10OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-11:&nbsp;ON&nbsp;<input type="checkbox" id="E11ON" name="E11ON">&nbsp;<input type="text" id="message11ON" size="20"></td>
+    <td>Input-11:&nbsp;OFF&nbsp;<input type="checkbox" id="E11OFF" name="E11OFF">&nbsp;<input type="text" id="message11OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-12:&nbsp;ON&nbsp;<input type="checkbox" id="E12ON" name="E12ON">&nbsp;<input type="text" id="message12ON" size="20"></td>
+    <td>Input-12:&nbsp;OFF&nbsp;<input type="checkbox" id="E12OFF" name="E12OFF">&nbsp;<input type="text" id="message12OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-13:&nbsp;ON&nbsp;<input type="checkbox" id="E13ON" name="E2ON">&nbsp;<input type="text" id="message13ON" size="20"></td>
+    <td>Input-13:&nbsp;OFF&nbsp;<input type="checkbox" id="E13OFF" name="E2OFF">&nbsp;<input type="text" id="message13OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-14:&nbsp;ON&nbsp;<input type="checkbox" id="E14ON" name="E14ON">&nbsp;<input type="text" id="message14ON" size="20"></td>
+    <td>Input-14:&nbsp;OFF&nbsp;<input type="checkbox" id="E14OFF" name="E14OFF">&nbsp;<input type="text" id="message14OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-15:&nbsp;ON&nbsp;<input type="checkbox" id="E15ON" name="E15ON">&nbsp;<input type="text" id="message15ON" size="20"></td>
+    <td>Input-15:&nbsp;OFF&nbsp;<input type="checkbox" id="E15OFF" name="E15OFF">&nbsp;<input type="text" id="message15OFF" size="20"></td>
+</tr>
+
+<tr><td>Input-16:&nbsp;ON&nbsp;<input type="checkbox" id="E16ON" name="E16ON">&nbsp;<input type="text" id="message16ON" size="20"></td>
+    <td>Input-16:&nbsp;OFF&nbsp;<input type="checkbox" id="E16OFF" name="E16OFF">&nbsp;<input type="text" id="message16OFF" size="20"></td>
+</tr>
+
+    </table>
+  </form>
+
+    <hr>
+	<tr><td align="center"><H3>Temperature Message</H3></td></tr>
+	<br>
+	
+    <table border="0"  cellspacing="0" cellpadding="" style="width:100%" >
+      
+      
+	  <tr>
+		<td align="left">Temp.1 High Value:&nbsp;<input type="text" id="T1H" name="" size="20"></td>
+		<td align="left">Temp.1 High Message:&nbsp;<input type="text" id="H1M" name="" size="20"></td>
+	  </tr>
+	  <tr>
+		<td align="left">Temp.1 Low&nbsp; Value:&nbsp;<input type="text" id="T1L" name="" size="20"></td>
+		<td align="left">Temp.1 Low&nbsp; Message:&nbsp;<input type="text" id="L1M" name="" size="20"></td>
+	  </tr>
+	  
+	  <tr>
+		<td align="left">Temp.2 High Value:&nbsp;<input type="text" id="T2H" name="" size="20"></td>
+		<td align="left">Temp.2 High Message:&nbsp;<input type="text" id="H2M" name="" size="20"></td>
+	  </tr>
+	  <tr>
+		<td align="left">Temp.2 Low&nbsp; Value:&nbsp;<input type="text" id="T2L" name="" size="20"></td>
+		<td align="left">Temp.2 Low&nbsp; Message:&nbsp;<input type="text" id="L2M" name="" size="20"></td>
+	  </tr>
+	  
+	  <tr>
+		<td align="left">Temp.3 High Value:&nbsp;<input type="text" id="T3H" name="" size="20"></td>
+		<td align="left">Temp.3 High Message:&nbsp;<input type="text" id="H3M" name="" size="20"></td>
+	  </tr>
+	  <tr>
+		<td align="left">Temp.3 Low&nbsp; Value:&nbsp;<input type="text" id="T3L" name="" size="20"></td>
+		<td align="left">Temp.3 Low&nbsp; Message:&nbsp;<input type="text" id="L3M" name="" size="20"></td>
+	  </tr>
+	  
+	  
+	  <tr><td align="left">Temp.1 High:</td><td><input type="text" id="T1H" name="" size="10"></td><td align="left">High.1 Message:</td><td><input type="text" id="H1M" name="" size="20"></td></tr>
+      <tr><td align="left">Temp.1 Low:</td><td><input type="text" id="T1L" name="" size="10"></td><td align="left">Low.1 Message:</td><td><input type="text" id="L1M" name="" size="20"></td></tr>
+      <tr><td align="left">Temp.2 High:</td><td><input type="text" id="T2H" name="" size="10"></td><td align="left">High.2 Message:</td><td><input type="text" id="H2M" name="" size="20"></td></tr>
+      <tr><td align="left">Temp.2 Low:</td><td><input type="text" id="T2L" name="" size="10"></td><td align="left">Low.2 Message:</td><td><input type="text" id="L2M" name="" size="20"></td></tr>
+      <tr><td align="left">Temp.3 High:</td><td><input type="text" id="T3H" name="" size="10"></td><td align="left">High.3 Message:</td><td><input type="text" id="H3M" name="" size="20"></td></tr>
+      <tr><td align="left">Temp.3 Low:</td><td><input type="text" id="T3L" name="" size="10"></td><td align="left">Low.3 Message:</td><td><input type="text" id="L3M" name="" size="20"></td></tr>-->
+  <!--  </table> 
+
+    <hr>-->
+    
+    <p class="text-center">
+      <button id="btnsave" class="btn btn-primary">SAVE</button>
+      <a href="configwifi.html" class="btn btn-danger">Config network</a>
+      <button id="btnreboot" class="btn btn-primary">REBOOT</button>
+      <div id="saveresult"></div>
+    </p>
+
+  </div>
+
+</body>
+
+
+
+<script src="jquery-3.5.1.min.js"></script>
+
+<script>
+  $(document).ready(function() {
+    console.log('ready');
+
+    
+
+
+    $.get({                   // get value from JSON file (SPIFFS) to input
+      url: "/getmessage",
+      //data: strdat,
+      success: function(response) {
+          //Do Something
+          //alert("Get data ok." + response);
+          //console.log("response = " + response);
+
+          $("#saveresult").html("Initialize message...").fadeOut(3000);
+
+          var str = response.split(",");
+          $("#server_address").val(str[0]);
+          $("#uuid").val(str[1]);
+          $("#out1on").val(str[2]);
+          $("#out2on").val(str[3]);
+          $("#out3on").val(str[4]);
+          $("#out4on").val(str[5]);
+          $("#out1off").val(str[6]);
+          $("#out2off").val(str[7]);
+          $("#out3off").val(str[8]);
+          $("#out4off").val(str[9]);
+          $("#send_data_every").val(str[10]);
+          $("#server_get_address").val(str[11]);
+          
+      },
+      error: function(xhr) {
+          //Do Something to handle error
+      }
+    });
+
+    $("#btnsave").click(function(){
+        console.log("click save message");
+
+        var strdat = "server_address=" + $("#server_address").val();
+            strdat += "&uuid=" + $("#uuid").val();
+            strdat += "&out1on=" + $("#out1on").val();
+            strdat += "&out2on=" + $("#out2on").val();
+            strdat += "&out3on=" + $("#out3on").val();
+            strdat += "&out4on=" + $("#out4on").val();
+            strdat += "&out1off=" + $("#out1off").val();
+            strdat += "&out2off=" + $("#out2off").val();
+            strdat += "&out3off=" + $("#out3off").val();
+            strdat += "&out4off=" + $("#out4off").val();
+            strdat += "&send_data_every=" + $("#send_data_every").val();  
+            strdat += "&server_get_address=" + $("#server_get_address").val(); 
+        
+
+        console.log(strdat);
+        
+        $.get({
+          url: "/savemessage",
+          data: strdat,
+          success: function(response) {
+              //Do Something
+              alert(response);
+
+              $("#saveresult").html("Save data success").show().fadeOut(3000);
+          },
+          error: function(xhr) {
+              //Do Something to handle error
+          }
+        });
+      }); // end btn save
+
+
+
+      $("#btnreboot").click(function(){
+
+        
+        $.get({
+          url: "/reboot",
+          //data: strdat,
+          success: function(response) {
+              //Do Something
+              alert(response);
+
+              //$("#reboot").html("R data success").show().fadeOut(3000);
+          },
+          error: function(xhr) {
+              //Do Something to handle error
+          }
+        });
+      }); // end btn reboot
+    
+
+  });
+</script>
+</html>

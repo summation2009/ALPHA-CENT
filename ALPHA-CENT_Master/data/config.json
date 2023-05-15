@@ -1,0 +1,22 @@
+{
+    "line_token":"utDQmPC6riGSedgiWIcGPgHEle058hcwMTKLR2A1S8F",
+    "line_host":"linenotify.sumtech.co.th",
+    "ssid": "sumtech 2.4G",
+    "password" : "123456aaff",
+    "dhcp" : "1",
+    "ip0" : "192","ip1" : "168","ip2" : "1","ip3" : "254",
+    "nm0" : "255","nm1" : "255","nm2" : "255","nm3" : "0",
+    "gw0" : "192","gw1" : "168","gw2" : "1","gw3" : "1",
+    "dns0" : "192","dns1" : "168","dns2" : "1","dns3" : "1",
+    "server_address" : "https://yourdomain/datalog",
+    "server_get_address" : "https://yourdomaindata/datalog",
+    "out1on" : 30.0,
+    "out2on" : 29.0,
+    "out3on" : 28.0,
+    "out4on" : 27.0,
+    "out1off" : 34.0,
+    "out2off" : 33.0,
+    "out3off" : 32.0,
+    "out4off" : 31.0,
+    "SEND_DATAT_EVERY": 60
+}

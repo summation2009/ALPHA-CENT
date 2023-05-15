@@ -1,0 +1,8 @@
+/***
+   Rui Santos
+   Complete project details at https://RandomNerdTutorials.com
+***/
+
+.table>:not(caption)>*>* {
+  border-bottom-width: 0px;
+}
